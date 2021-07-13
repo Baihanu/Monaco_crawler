@@ -51,9 +51,12 @@ class MonacoCrawler:
         cond_cnh = drive.find_element_by_xpath('//*[@id="divPontuacao"]/table[2]/tbody/tr/td[4]')
         cond_periodo = drive.find_element_by_xpath('//*[@id="divPontuacao"]/table[2]/tbody/tr/td[6]')
         cond_nome = drive.find_element_by_xpath('//*[@id="divDadosPontuacao"]/table[1]/tbody/tr[1]/td[1]')
+        nome = cond_nome.text[18:34]
 
-        monaco_dict = {'CPF': cond_cpf.text, 'CNH': cond_cnh.text, 'Periodo': cond_periodo.text, 'Nome': cond_nome.text}
+        monaco_dict = {'CPF': cond_cpf.text, 'CNH': cond_cnh.text, 'Periodo': cond_periodo.text, 'Nome': nome}
         print(monaco_dict)
+
+        drive.quit()
 
 
 bot = MonacoCrawler()
