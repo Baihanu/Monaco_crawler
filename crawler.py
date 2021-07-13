@@ -17,8 +17,9 @@ class MonacoCrawler:
     def campos(self):
         drive = self.drive
         drive.get('http://consultas.detrannet.sc.gov.br/servicos/ConsultaPontuacaoCondutor.asp')
+        drive.maximize_window()
 
-        time.sleep(2)
+        time.sleep(1)
 
         captcha_photo = drive.find_element_by_xpath('//*[@id="imgDesafio"]')
         captcha_photo.screenshot('captcha.png')
@@ -54,7 +55,7 @@ class MonacoCrawler:
         width = location1['x'] + size['width']
         height = location1['y'] + size['height']
         im = Image.open('pageImage.png')
-        im = im.crop((int(x), int(y), int(width), int(height)))
+        im = im.crop((int(x), int(y), int(width), int(height + 100)))
         im.save('dados_pessoais.png')
 
         os.remove('captcha.png')
