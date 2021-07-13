@@ -1,8 +1,8 @@
 import os
-import time
 from decouple import config
 from selenium import webdriver
 from twocaptcha import TwoCaptcha
+from PIL import Image
 
 
 class MonacoCrawler:
@@ -16,8 +16,6 @@ class MonacoCrawler:
         drive = self.drive
         drive.get('http://consultas.detrannet.sc.gov.br/servicos/ConsultaPontuacaoCondutor.asp')
         drive.maximize_window()
-
-        time.sleep(1)
 
         captcha_photo = drive.find_element_by_xpath('//*[@id="imgDesafio"]')
         captcha_photo.screenshot('captcha.png')
@@ -43,9 +41,21 @@ class MonacoCrawler:
         captcha.send_keys(result_code)
         botao_consultar.click()
 
-        os.remove('captcha.png')
+        element = drive.find_element_by_id("divPontuacao")
+        location1 = element.location
+        size = element.size
+        drive.save_screenshot("pageImage.png")
 
-        drive.save_screenshot('informações_condutor.png')
+        x = location1['x']
+        y = location1['y']
+        width = location1['x'] + size['width']
+        height = location1['y'] + size['height']
+        im = Image.open('pageImage.png')
+        im = im.crop((int(x), int(y), int(width), int(height)))
+        im.save('dados_pessoais.png')
+
+        os.remove('captcha.png')
+        os.remove('pageImage.png')
 
         cond_cpf = drive.find_element_by_xpath('//*[@id="divPontuacao"]/table[2]/tbody/tr/td[2]')
         cond_cnh = drive.find_element_by_xpath('//*[@id="divPontuacao"]/table[2]/tbody/tr/td[4]')
@@ -59,5 +69,9 @@ class MonacoCrawler:
         drive.quit()
 
 
-bot = MonacoCrawler()
-bot.campos()
+try:
+    bot = MonacoCrawler()
+    bot.campos()
+
+except:
+    print('Estamos com problemas em nossos servidores, por favor, tente novamente em alguns segundos')
