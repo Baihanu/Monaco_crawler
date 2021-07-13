@@ -1,10 +1,8 @@
 import os
 import time
-
 from decouple import config
 from selenium import webdriver
 from twocaptcha import TwoCaptcha
-from PIL import Image
 
 
 class MonacoCrawler:
@@ -45,21 +43,12 @@ class MonacoCrawler:
         captcha.send_keys(result_code)
         botao_consultar.click()
 
-        element = drive.find_element_by_id("divPontuacao")
-        location1 = element.location
-        size = element.size
-        drive.save_screenshot("pageImage.png")
+        drive.execute_script("document.body.style.zoom='80%'")
+        drive.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
-        x = location1['x']
-        y = location1['y']
-        width = location1['x'] + size['width']
-        height = location1['y'] + size['height']
-        im = Image.open('pageImage.png')
-        im = im.crop((int(x), int(y), int(width), int(height + 100)))
-        im.save('dados_pessoais.png')
+        drive.save_screenshot('dados_pessoais.png')
 
         os.remove('captcha.png')
-        os.remove('pageImage.png')
 
         cond_cpf = drive.find_element_by_xpath('//*[@id="divPontuacao"]/table[2]/tbody/tr/td[2]')
         cond_cnh = drive.find_element_by_xpath('//*[@id="divPontuacao"]/table[2]/tbody/tr/td[4]')

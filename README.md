@@ -9,6 +9,7 @@ A consulta é feita no site: [Detran SC](http://consultas.detrannet.sc.gov.br/se
 
 Por esse motivo o Chrome Webdriver está junto do repositório.
 
+Assim que o script terminar de rodar, a imagem solicidade estará na raiz do projeto, com o nome "dados_pessoais.png"
 ## Para Desenvolver:
 
 1. Clone o repositório.
