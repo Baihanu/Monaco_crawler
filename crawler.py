@@ -1,4 +1,6 @@
 import os
+import time
+
 from decouple import config
 from selenium import webdriver
 from twocaptcha import TwoCaptcha
@@ -15,7 +17,8 @@ class MonacoCrawler:
     def campos(self):
         drive = self.drive
         drive.get('http://consultas.detrannet.sc.gov.br/servicos/ConsultaPontuacaoCondutor.asp')
-        drive.maximize_window()
+
+        time.sleep(2)
 
         captcha_photo = drive.find_element_by_xpath('//*[@id="imgDesafio"]')
         captcha_photo.screenshot('captcha.png')
