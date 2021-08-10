@@ -27,6 +27,7 @@ pip install -r requirements.txt
 ```
 ### Ambientes Windows:
 ```
+Set-ExecutionPolicy Unrestricted -Scope Process
 py -3 -m venv .venv
 .venv\Scripts\activate
 copy env-sample .env
