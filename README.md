@@ -35,3 +35,15 @@ pip install -r requirements.txt
 ```
 
 
+Para quem usa Windows:
+
+Crie o arquivo: 
+```nome_do_projeto\.venv\Scripts\mng.bat```
+
+No conteúdo do arquivo: 
+```@python "%VIRTUAL_ENV%\..\manage.py" %*```
+
+O comando equivalente ao alias no Windows é:
+
+```doskey mng=@python "%VIRTUAL_ENV%\..\manage.py" $*```
+
