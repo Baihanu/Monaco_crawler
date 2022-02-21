@@ -33,7 +33,8 @@ py -3 -m venv .venv
 copy env-sample .env
 pip install -r requirements.txt
 ```
-
+### Caso queira liberar os scripts como Admnistrador no Ambiente Windows:
+[Clique aqui](https://docs.vmware.com/en/vRealize-Automation/7.6/com.vmware.vra.iaas.hp.doc/GUID-9670AFC5-76B8-4321-822A-BCE05800DB5B.html)
 
 Para quem usa Windows:
 
