@@ -48,3 +48,24 @@ O comando equivalente ao alias no Windows é:
 
 ```doskey mng=@python "%VIRTUAL_ENV%\..\manage.py" $*```
 
+
+# Scripts para trabalhar com postgres
+
+```
+#!/bin/bash
+
+# Update
+sudo apt update
+
+# Install postgres
+sudo apt install -y postgresql postgresql-contrib
+
+# Create database
+sudo -u postgres createdb <_project_name_>
+
+# sudo su - postgres
+# psql
+# CREATE USER postgres;
+# ALTER USER postgres WITH PASSWORD 'postgres';
+# ALTER DATABASE <_project_name_> OWNER TO postgres;
+```
